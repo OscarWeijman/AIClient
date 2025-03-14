@@ -2,8 +2,8 @@
 
 Een moderne PHP client voor AI API's zoals OpenAI en DeepSeek.
 
-[![Tests](https://github.com/oscarweijman/ai-client/actions/workflows/tests.yml/badge.svg)](https://github.com/oscarweijman/ai-client/actions/workflows/tests.yml)
-[![Static Analysis](https://github.com/oscarweijman/ai-client/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/oscarweijman/ai-client/actions/workflows/static-analysis.yml)
+[![Tests](https://github.com/OscarWeijman/AIClient/actions/workflows/tests.yml/badge.svg)](https://github.com/OscarWeijman/AIClient/actions/workflows/tests.yml)
+[![Static Analysis](https://github.com/OscarWeijman/AIClient/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/OscarWeijman/AIClient/actions/workflows/static-analysis.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Installatie
