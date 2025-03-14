@@ -21,4 +21,14 @@ interface AIClientInterface
      * @return array The response from the AI service
      */
     public function chatCompletion(array $messages, array $options = []): array;
+    
+    /**
+     * Send a streaming chat completion request to the AI service
+     *
+     * @param array $messages Array of message objects with role and content
+     * @param array $options Additional options for the request
+     * @param callable $callback Function to call for each chunk of the stream
+     * @return void
+     */
+    public function streamingChatCompletion(array $messages, callable $callback, array $options = []): void;
 }

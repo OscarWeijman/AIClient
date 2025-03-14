@@ -40,4 +40,12 @@ abstract class AbstractAIClient implements AIClientInterface
      * @return array The processed response
      */
     abstract protected function processResponse(array $response): array;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function streamingChatCompletion(array $messages, callable $callback, array $options = []): void
+    {
+        throw new \RuntimeException('Streaming is not supported by this provider');
+    }
 }

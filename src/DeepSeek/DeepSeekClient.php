@@ -5,9 +5,13 @@ namespace OscarWeijman\AIClient\DeepSeek;
 use GuzzleHttp\Exception\GuzzleException;
 use OscarWeijman\AIClient\AbstractAIClient;
 use OscarWeijman\AIClient\Exceptions\AIClientException;
+use OscarWeijman\AIClient\Traits\StreamingTrait;
+use Psr\Http\Message\ResponseInterface;
 
 class DeepSeekClient extends AbstractAIClient
 {
+    use StreamingTrait;
+    
     protected string $baseUrl = 'https://api.deepseek.com/v1/';
     
     /**
@@ -66,6 +70,31 @@ class DeepSeekClient extends AbstractAIClient
             return $this->processResponse($result);
         } catch (GuzzleException $e) {
             throw new AIClientException("DeepSeek API error: {$e->getMessage()}", $e->getCode(), $e);
+        }
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function streamingChatCompletion(array $messages, callable $callback, array $options = []): void
+    {
+        $payload = array_merge([
+            'model' => $options['model'] ?? 'deepseek-chat',
+            'messages' => $messages,
+            'max_tokens' => $options['max_tokens'] ?? 150,
+            'temperature' => $options['temperature'] ?? 0.7,
+            'stream' => true,
+        ], $options);
+        
+        try {
+            $response = $this->httpClient->post('chat/completions', [
+                'json' => $payload,
+                'stream' => true,
+            ]);
+            
+            $this->handleStreamingResponse($response, $callback, 'deepseek');
+        } catch (GuzzleException $e) {
+            throw new AIClientException("DeepSeek API streaming error: {$e->getMessage()}", $e->getCode(), $e);
         }
     }
     
