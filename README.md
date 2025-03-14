@@ -14,6 +14,8 @@ composer require oscarweijman/ai-client
 
 ## Gebruik
 
+### Client initialiseren
+
 ```php
 use OscarWeijman\AIClient\AIClientFactory;
 
@@ -22,19 +24,50 @@ $openaiClient = AIClientFactory::create('openai', 'jouw-api-key');
 
 // Maak een DeepSeek client
 $deepseekClient = AIClientFactory::create('deepseek', 'jouw-api-key');
+```
 
-// Completion request
+### Text Completion
+
+```php
 $result = $openaiClient->completion('Wat is de hoofdstad van Nederland?', [
     'max_tokens' => 100,
     'temperature' => 0.7,
 ]);
 
-// Chat completion request
+echo $result['content'];
+```
+
+### Chat Completion
+
+```php
 $result = $openaiClient->chatCompletion([
     ['role' => 'system', 'content' => 'Je bent een behulpzame assistent.'],
     ['role' => 'user', 'content' => 'Wat is de hoofdstad van Nederland?'],
 ], [
     'max_tokens' => 100,
+    'temperature' => 0.7,
+]);
+
+echo $result['content'];
+```
+
+### Streaming Chat Completion (v1.1.0+)
+
+```php
+$messages = [
+    ['role' => 'system', 'content' => 'Je bent een behulpzame assistent.'],
+    ['role' => 'user', 'content' => 'Schrijf een kort verhaal over een robot die leert programmeren.'],
+];
+
+// Callback functie die wordt aangeroepen voor elk stukje van de streaming response
+$callback = function ($chunk) {
+    echo $chunk['content'];
+    flush(); // Zorg ervoor dat de output direct wordt weergegeven
+};
+
+// Voer de streaming chat completion uit
+$openaiClient->streamingChatCompletion($messages, $callback, [
+    'model' => 'gpt-3.5-turbo',
     'temperature' => 0.7,
 ]);
 ```
@@ -56,6 +89,20 @@ Alle API responses worden gestandaardiseerd naar het volgende formaat:
         'total_tokens' => 30,
     ],
 ]
+```
+
+## Error Handling
+
+De bibliotheek gooit `AIClientException` bij fouten:
+
+```php
+use OscarWeijman\AIClient\Exceptions\AIClientException;
+
+try {
+    $result = $client->chatCompletion($messages);
+} catch (AIClientException $e) {
+    echo "Error: " . $e->getMessage();
+}
 ```
 
 ## Tests uitvoeren
