@@ -1,0 +1,37 @@
+name: Integration Tests
+
+on:
+  # Handmatig triggeren via de GitHub Actions interface
+  workflow_dispatch:
+  # Optioneel: Dagelijks uitvoeren om te controleren of de API's nog werken
+  schedule:
+    - cron: '0 0 * * 0' # Elke zondag om middernacht
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+    
+    name: API Integration Tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: dom, curl, libxml, mbstring, zip, json
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Create .env file
+        run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
+          echo "DEEPSEEK_API_KEY=${{ secrets.DEEPSEEK_API_KEY }}" >> .env
+          echo "ENABLE_API_TESTS=true" >> .env
+
+      - name: Execute integration tests
+        run: vendor/bin/pest tests/Integration

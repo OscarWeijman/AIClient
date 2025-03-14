@@ -1,0 +1,45 @@
+{
+    "name": "oscarweijman/ai-client",
+    "description": "Een moderne PHP AI Client",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "*"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin": "^2.1",
+        "mockery/mockery": "^1.5",
+        "vlucas/phpdotenv": "^5.5",
+        "phpstan/phpstan": "^1.10"
+    },
+    "authors": [
+        {
+            "name": "Oscar Weijman"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OscarWeijman\\AIClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OscarWeijman\\AIClient\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "pest --exclude-group=integration",
+        "test-unit": "pest tests/Unit",
+        "test-feature": "pest tests/Feature",
+        "test-integration": "pest tests/Integration",
+        "test-all": "pest",
+        "analyse": "phpstan analyse src tests --level=5"
+    }
+}
