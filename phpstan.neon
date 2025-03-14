@@ -5,3 +5,5 @@ parameters:
         - tests
     excludePaths:
         - vendor
+    ignoreErrors:
+        - '#Undefined variable: \$this#'
