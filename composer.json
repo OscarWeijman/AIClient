@@ -12,8 +12,7 @@
         "pestphp/pest-plugin": "^2.1",
         "mockery/mockery": "^1.5",
         "vlucas/phpdotenv": "^5.5",
-        "phpstan/phpstan": "^1.10",
-        "pestphp/pest-plugin-drift": "^2.6"
+        "phpstan/phpstan": "^1.10"
     },
     "authors": [
         {

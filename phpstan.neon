@@ -7,3 +7,4 @@ parameters:
         - vendor
     ignoreErrors:
         - '#Undefined variable: \$this#'
+    reportUnmatchedIgnoredErrors: false
