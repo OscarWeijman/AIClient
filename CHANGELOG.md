@@ -5,6 +5,14 @@ Alle belangrijke wijzigingen aan dit project worden in dit bestand gedocumenteer
 Het format is gebaseerd op [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 en dit project volgt [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-03-14
+
+### Toegevoegd
+- Streaming ondersteuning voor chat completions via `streamingChatCompletion` methode
+- StreamingTrait voor herbruikbare streaming functionaliteit
+- Voorbeeldcode voor streaming met OpenAI en DeepSeek
+- Unit tests voor streaming functionaliteit
+
 ## [1.0.0] - 2025-03-14
 
 ### Toegevoegd
@@ -38,5 +46,6 @@ en dit project volgt [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Veiligheid
 - *Nog geen veiligheidsverbeteringen*
 
-[Unreleased]: https://github.com/OscarWeijman/AIClient/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/OscarWeijman/AIClient/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/OscarWeijman/AIClient/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/OscarWeijman/AIClient/releases/tag/v1.0.0
